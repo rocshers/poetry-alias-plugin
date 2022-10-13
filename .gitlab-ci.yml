@@ -1,0 +1,53 @@
+image: python:3.10.2-buster
+
+stages:
+  - install
+  - pypi-push
+
+variables:
+  PIP_CACHE_DIR: "${CI_PROJECT_DIR}/.cache/pip"
+
+before_script:
+  - whoami
+  - pwd
+
+.install-app:
+  image: python:3.10.2-buster
+  tags:
+    - docker
+  cache:
+    key: cache
+    paths:
+      - install-poetry.py
+      - .cache/pip
+      - .cache/pypoetry
+      - .venv
+      - .mypy_cache
+      - .pytest_cache
+      - .local/bin/poetry
+  before_script:
+    - whoami
+    - pwd
+    - export PATH=/root/.local/bin:$PATH
+    - export POETRY_VERSION=1.2.2
+    - pip install --upgrade pip
+    - curl -o install-poetry.py https://install.python-poetry.org
+    - python install-poetry.py
+    - poetry --version
+    - poetry config virtualenvs.in-project true
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+install:
+  stage: install
+  extends: .install-app
+  script:
+    - poetry install
+
+pypi-push:
+  stage: pypi-push
+  extends: .install-app
+  script:
+    - poetry config repositories.pypi https://upload.pypi.org/legacy/
+    - poetry config pypi-token.pypi ${PYPI_TOKEN}
+    - poetry publish -r pypi --build
