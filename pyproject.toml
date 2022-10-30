@@ -4,11 +4,17 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "poetry-aliases-plugin"
-version = "0.1.0"
+version = "0.1.1"
 description = "Poetry plugin to run commands through aliases"
-authors = ["rocshers <prog.rocshers@gmail.com>"]
+authors = ["irocshers <develop.iam@rocshers.com>"]
+repository = "https://github.com/rocshers/poetry-alias-plugin"
 license = "MIT"
 readme = "readme.md"
+classifiers = [
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Topic :: Software Development :: Build Tools"
+]
 packages = [{include = "poetry_aliases_plugin"}]
 
 [tool.poetry.plugins."poetry.application.plugin"]
@@ -19,11 +25,11 @@ python = ">=3.10"
 poetry = ">=1.2.0"
 
 [tool.poetry.group.dev.dependencies]
-black = "^22.10.0"
-wemake-python-styleguide = "^0.17.0"
+black = "*"
+wemake-python-styleguide = "*"
 
 [tool.aliases]
-tests = "poetry run pytest"
+test = "poetry run pytest"
 format = "poetry run black . && poetry run isort ."
 
 [tool.black]

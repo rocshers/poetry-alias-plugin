@@ -151,3 +151,4 @@ app/main/settings_local.py
 app/tmp/
 app/errors/
 app/report_document.docx
+t.py
