@@ -15,8 +15,7 @@ Poetry plugin to run commands through aliases
 
 ```bash
 poetry self add poetry-aliases-plugin
-poetry alias this # ==> poetry run python -m this
-poetry this # ==> poetry run python -m this
+poetry l this # ==> poetry run python -m this
 ```
 
 ## Dependencies

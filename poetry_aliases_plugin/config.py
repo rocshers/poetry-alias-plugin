@@ -41,7 +41,8 @@ class AliasesConfig(object):
     def _default_setting(self):
         return {
             'find_poetry_command': False,
-            'engine': 'poetry',
+            'engine': 'subprocess',
+            # 'engine': 'poetry',
         }
 
     def validate_settings(self, settings: dict):

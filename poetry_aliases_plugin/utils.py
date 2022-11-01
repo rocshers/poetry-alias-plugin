@@ -38,6 +38,4 @@ def plugin_exception_wrapper(func: Callable):
 
 
 def normalize_command(command: str) -> str:
-    command = command.strip().removeprefix('poetry').strip()
-    command = command if command.startswith('run') else f'run {command}'
-    return command.strip()
+    return command.strip().removeprefix('poetry').strip()
